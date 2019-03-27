@@ -7,12 +7,15 @@ import * as FavoriteActions from '../../store/actions/favorites';
 class Main extends Component {
   static propTypes = {
     addFavoriteRequest: PropTypes.func.isRequired,
-    favorites: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      description: PropTypes.string,
-      url: PropTypes.string,
-    })).isRequired,
+    favorites: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        description: PropTypes.string,
+        url: PropTypes.string,
+      })),
+    }).isRequired,
   };
 
   state = {
@@ -34,10 +37,11 @@ class Main extends Component {
             onChange={e => this.setState({ repositoryInput: e.target.value })}
           />
           <button type="submit">Adicionar</button>
+          { this.props.favorites.loading && <span>Carregando</span> }
         </form>
 
         <ul>
-          { this.props.favorites.map(favorite => (
+          { this.props.favorites.data.map(favorite => (
             <li key={favorite.id}>
               <p>
                 <strong>{favorite.name}</strong>
