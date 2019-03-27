@@ -27,7 +27,7 @@ export default function favorites(state = INITIAL_STATE, action) {
         error: null,
         data: [...state.data, action.payload.data],
       };
-    case Types.FAILURE_REQUEST:
+    case Types.ADD_FAILURE:
       return { ...state, loading: false, error: action.payload.error };
     default:
       return state;
