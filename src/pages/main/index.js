@@ -25,6 +25,7 @@ class Main extends Component {
   handleAddRepository = (e) => {
     e.preventDefault();
     this.props.addFavoriteRequest(this.state.repositoryInput);
+    this.setState({ repositoryInput: '' });
   }
 
   render() {
